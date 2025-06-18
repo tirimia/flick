@@ -31,18 +31,23 @@ The current buffer will be moved to the selected side-window position, and the o
 
 Customize the prompt keys by setting these constants:
 
+```emacs-lisp
 (setq flick-side-keys '(?h ?j ?k ?l))  ; Default: hjkl (vim-style)
 (setq flick-slot-keys '(?s ?d ?f))     ; Default: sdf (home row)
+```
 
 ### Window Sizing
 
 Control the size of side-windows:
 
+```emacs-lisp
 (setq flick-window-width 0.3)    ; Width for left/right sides (30% of frame)
 (setq flick-window-height 0.25)  ; Height for top/bottom sides (25% of frame)
+```
 
 ### Complete Configuration Example
 
+```emacs-lisp
 (use-package flick
   :vc (:url "https://github.com/tirimia/flick")
   :bind ("C-c f" . flick)
@@ -51,6 +56,7 @@ Control the size of side-windows:
         flick-window-height 0.3
         flick-side-keys '(?a ?s ?w ?d)    ; Custom keys
         flick-slot-keys '(?q ?w ?e)))     ; Custom slot keys
+```
 
 ## Features
 
