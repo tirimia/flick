@@ -59,22 +59,18 @@
              (cl-mapcar #'cons labels keys)
              " "))
 
-(defun flick--build-prompt (type labels keys)
-  "Build prompt string for TYPE selection using LABELS and KEYS."
-  (concat type " - "
-          (flick--format-choices labels keys)
-          ": "))
+(defun flick--prompt-char (type labels keys)
+  "Prompt for a character, selecting a TYPE using LABELS and KEYS."
+  (read-char-choice
+   (concat type " - " (flick--format-choices labels keys) ": ")
+   keys))
 
 (defun flick--prompt ()
   "Prompt for side then slot position, returning a cons cell."
   (let* ((side-labels '(left bottom top right))
          (slot-labels '(-1 0 1))
-         (side-char (read-char-choice
-                     (flick--build-prompt "Side" side-labels flick-side-keys)
-                     flick-side-keys))
-         (slot-char (read-char-choice
-                     (flick--build-prompt "Slot" slot-labels flick-slot-keys)
-                     flick-slot-keys))
+         (side-char (flick--prompt-char "Side" side-labels flick-side-keys))
+         (slot-char (flick--prompt-char "Slot" slot-labels flick-slot-keys))
          (side (nth (cl-position side-char flick-side-keys) side-labels))
          (slot (nth (cl-position slot-char flick-slot-keys) slot-labels)))
     (cons side slot)))
